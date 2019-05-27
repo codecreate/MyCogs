@@ -1,0 +1,8 @@
+//This file is very much concerned with the display of items. Whats dya make of that'
+
+.cogsCollection{
+  display: grid;
+  grid-template-colummns: 40px 50px auto 50px 40px;
+  //grid-template-columns: inherit;
+  //grid-template-rows: inherit;
+}
