@@ -2,30 +2,36 @@
  * Receives props from the app and displays the collection accordingly
  */
 
-import React from 'react';
-import CogsCard from './CogsCard';
+// @flow
+import * as React from 'react';
+import MyCogsCard from './MyCogsCard';
 
-export class MyCogsCollection extends React.Component {
+type Props = {
+    userCollection: Object,
+}
 
-    constructor(props) {
-        super(props);
-    }
+export class MyCogsCollection extends React.Component<Props> {
 
-    componentDidMount() {
-    }
+    // constructor(Props:props) {
+    //     super(props);
+    // }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log('MyCogsCollection componentDidUpdate props', this.props.collectionData.releases);
-    }
+    // componentDidMount() {
+    // }
+
+    // componentDidUpdate(prevProps, prevState, snapshot) {
+    // }
 
     render() {
+        const {userCollection} = this.props;
         return (
             <div className="cogsCollection">
                 {
-                    this.props.collectionData.releases &&
-                    this.props.collectionData.releases.map((releaseData, i) => (
-                        <CogsCard key={"release_" + i} releaseData={releaseData}/>
-                    ))}
+                    userCollection &&
+                    userCollection.map((releaseData, i) => (
+                        <MyCogsCard key={"release_" + i} releaseData={releaseData}/>
+                    ))
+                }
             </div>
         );
     }

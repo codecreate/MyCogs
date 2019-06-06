@@ -1,10 +1,15 @@
-import React, { Component } from 'react';
+// @flow
+
+import * as React from 'react';
 import App from './App';
-import {Header} from './components/Header';
 
-class Home extends Component {
+type Props = {
+    auth: any
+}
 
-    constructor(props){
+class Home extends React.Component<Props> {
+
+    constructor(props:any){
         super(props);
         this.login = this.login.bind(this);
         this.logout = this.logout.bind(this);

@@ -1015,8 +1015,8 @@ Reated first working version which authoris
 #	new file:   src/Home.js
 #	new file:   src/Routes.js
 #	new file:   src/auth.js
-#	new file:   src/components/CogsCard.js
-#	new file:   src/components/Header.js
+#	new file:   src/components/MyCogsCard.js
+#	new file:   src/components/MyCogsHeader.js
 #	new file:   src/components/MyCogsCollection.js
 #	new file:   src/containers/MyCogsCollectionContainer.js
 #	new file:   src/history.js

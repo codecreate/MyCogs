@@ -13,7 +13,7 @@ router.get("/", function (req, res, next) {
 
 router.get("/authorise", function (req, res, next) {
     console.log('cogsAPI authorise');
-    var oAuth = new Discogs().oauth();
+    let oAuth = new Discogs().oauth();
     oAuth.getRequestToken(
         process.env.CONSUMER_KEY,
         process.env.CONSUMER_SECRET,
@@ -37,7 +37,7 @@ router.get("/authorise", function (req, res, next) {
 
 router.get('/callback', function (req, res) {
     console.log('cogsAPI callback using ',app.locals.requestData);
-    var oAuth = new Discogs(app.locals.requestData).oauth();
+    let oAuth = new Discogs(app.locals.requestData).oauth();
     console.log("req.query.oauth_verifier prev",req.query.oauth_verifier);
     oAuth.getAccessToken(
         req.query.oauth_verifier, // Verification code sent back by Discogs
@@ -56,7 +56,7 @@ router.get('/callback', function (req, res) {
 
 router.get("/identity", function (req, res) {
     console.log('cogsAPI identity accessData', app.locals.accessData);
-    var dis = new Discogs(app.locals.accessData);
+    let dis = new Discogs(app.locals.accessData);
     dis.getIdentity(function (err, data) {
         if (data){
             console.log('Identity data ',data);
@@ -70,7 +70,7 @@ router.get("/identity", function (req, res) {
 
 router.get("/collection", function (req, res) {
     console.log('cogsAPI collection', req.query.username, req.query.folder, req.query.page, req.query.per_page);
-    var col = new Discogs(app.locals.accessData).user().collection();
+    let col = new Discogs(app.locals.accessData).user().collection();
     col.getReleases(req.query.username, req.query.folder, {page: req.query.page, per_page: req.query.per_page}, function(err, data){
         if (data){
             console.log('Collection data ', data);
@@ -81,4 +81,18 @@ router.get("/collection", function (req, res) {
 
     });
 });
+
+router.get("/release", function (req, res) {
+    console.log('cogsAPI release', req);
+    let release = new Discogs(app.locals.accessData).database();
+    release.getRelease(req.release_id, function(err, data){
+        if (data){
+            console.log('Release data ', data);
+            res.send(data);
+        }else if (err){
+            console.log('Release error ', err);
+        }
+    })
+});
+
 module.exports = router;
