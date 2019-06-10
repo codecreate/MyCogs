@@ -41,7 +41,7 @@ export default class Auth {
                         this.setSession(authResult);
                         // history.replace('/home');
                     } else {
-                    history.replace('/home');
+                    history.replace('/');
                     console.log('handleAuthentication failure');
                 }
             })
@@ -58,16 +58,16 @@ export default class Auth {
         localStorage.setItem('mycogsToken', authResult.token);
         // localStorage.setItem('id_token', authResult.idToken);
         // localStorage.setItem('expires_at', expiresAt);
-        // navigate to the home route
-        history.replace('/home');
+        // navigate to the root route
+        history.replace('/');
     }
 
     // removes user details from localStorage
     logout = () => {
         // Clear access token
         localStorage.removeItem('mycogsToken');
-        // navigate to the home route
-        history.replace('/home');
+        // navigate to the root route
+        history.replace('/')
     }
 
     // checks if the user is authenticated

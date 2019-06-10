@@ -1,30 +1,23 @@
+// @flow
 // this set of controls will filter the collection
 
-// @flow
 import * as React from 'react';
 import {connect} from 'react-redux';
-// import the action for filtering
-import {myCogsFilterCollection} from '../actions/myCogsFilterActions.js';
+import Checkbox from '@material-ui/core/Checkbox';
+// import the action
+import { myCogsFilterCollection } from "../actions/actions";
 
-type State = {
-    filters: any,
-}
-
-const MyCogsFilter = ({ dispatch }) => {
+const MyCogsFilter = ({filterLabelIDs, myCogsFilterCollection}) => {
     return (
-        <button
-            onClick={e => {
-                e.preventDefault()
-                dispatch(myCogsFilterCollection('Filter the Collection'))
-            }}
-        >WOOP</button>
+        <Checkbox
+            onClick={() => myCogsFilterCollection(filterLabelIDs)}
+            value="checkedA"
+        />
     )
 };
 
-// const mapStateToProps = state => {
-//     return {
-//         MyCogsFilter: getVisibleTodos(state.todos, state.visibilityFilter)
-//     }
-// }
-
-export default connect()(MyCogsFilter)
+// export default MyCogsFilter;
+export default connect(
+    null,
+    {myCogsFilterCollection}
+)(MyCogsFilter);

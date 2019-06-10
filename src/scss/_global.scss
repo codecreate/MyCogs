@@ -1,4 +1,16 @@
 body, html {
   margin: 0;
   padding: 0;
+  height: 100%;
+}
+h1{
+  font-size: 3rem;
+  font-weight: 400;
+}
+h2{
+  font-size: 1.6rem;
+  font-weight: 400;
+}
+._grow{
+  flex-grow: 1;
 }

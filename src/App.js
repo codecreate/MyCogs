@@ -2,18 +2,25 @@
 
 import * as React from 'react';
 import history from "./history";
-import {MyCogsHeader} from './components/MyCogsHeader';
-import {MyCogsCollection} from './components/MyCogsCollection';
+import {MyCogsHeader} from './containers/MyCogsHeader';
+import {MyCogsWelcome} from './components/MyCogsWelcome';
+import MyCogsCollection from './containers/MyCogsCollection';
+
+// import connect to bind up the App to the action
+// import the action for adding the collection to the store
+import {connect} from 'react-redux';
+import { myCogsAddCollection, myCogsAddLabel } from "./actions/actions";
 
 type Props = {
     isAuthenticated: boolean,
     handleAuth: Function,
     username: string,
+    myCogsAddCollection: any,
+    myCogsAddLabel: any,
 }
 
 type State = {
     userIdentity: Object,
-    userCollection: Array<any>,
     currentPage: number,
     error: boolean,
     hasMore: boolean,
@@ -83,14 +90,14 @@ class App extends React.Component<Props, State> {
                     return res.json();
                 })
                 .then(res => {
+                    // add the loaded collection to the redux store with the myCogsAddCollection action
+                    console.log('fetchCollection - myCogsAddCollection', res.releases);
+                    this.props.myCogsAddCollection(res.releases);
+                    this.props.myCogsAddLabel(res.releases);
                     this.setState({
                         hasMore: (nextPage < res.pagination.pages),
                         isLoading: false,
                         currentPage: nextPage,
-                        userCollection: [
-                            ...this.state.userCollection,
-                            ...res.releases
-                        ],
                     });
                 })
                 .catch(err => {
@@ -104,18 +111,27 @@ class App extends React.Component<Props, State> {
     };
 
     render() {
+        const centerMe = {
+            alignItems: 'center',
+            display: 'flex',
+            height: '100%',
+            justifyContent: 'center',
+        };
         return (
             this.props.isAuthenticated
                 ?
                 <>
-                    <header><MyCogsHeader isAuthenticated handleAuth={this.props.handleAuth}
-                                    userIdentity={this.state.userIdentity}/></header>
-                    <main><MyCogsCollection userCollection={this.state.userCollection}/></main>
+                    <MyCogsHeader isAuthenticated handleAuth={this.props.handleAuth}
+                                    userIdentity={this.state.userIdentity}/>
+                    <main><MyCogsCollection /></main>
                 </>
                 :
-                <header><MyCogsHeader handleAuth={this.props.handleAuth}/></header>
+                <main style={centerMe}><MyCogsWelcome handleAuth={this.props.handleAuth}/></main>
         )
     }
 }
 
-export default App;
+export default connect(
+    null,
+    {myCogsAddCollection, myCogsAddLabel}
+)(App);

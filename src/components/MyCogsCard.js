@@ -28,7 +28,7 @@ class MyCogsCard extends React.Component<Props>{
         return (
             <div className="cogs_card" style={cardStyle}>
                 <div className="cogs_card__details">
-                    <div className="cogs_card__details_title">{this.props.releaseData.basic_information.title}</div>
+                    <div className="cogs_card__details_title" data-release_label={this.props.releaseData.basic_information.labels[0].name}>{this.props.releaseData.basic_information.title}</div>
                 </div>
             </div>
         );
