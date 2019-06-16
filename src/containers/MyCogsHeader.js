@@ -24,46 +24,46 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 
 import MyCogsFilters from './MyCogsFilters';
 
-type Props = {
-    handleAuth: any,
-    isAuthenticated?: boolean,
-    userIdentity: Object,
-}
+const useStyles = makeStyles(theme => ({
+    root: {
+        flexGrow: 1,
+    },
+    button: {
+        margin: theme.spacing(1),
+    },
+    username: {
+        margin: theme.spacing(1),
+    },
+}));
 
-export class MyCogsHeader extends React.Component<Props>{
+const MyCogsHeader = (props) => {
 
-    render() {
-        // const classes = useStyles();
+    const classes = useStyles();
 
-        return (
+    return (
+        <>
+        {props.isAuthenticated
+            ?
             <>
-            {this.props.isAuthenticated
-                ?
-                <>
-                    <AppBar position="static">
-                        <Toolbar variant="dense">
-
-                            <IconButton edge="start" color="inherit" aria-label="Menu">
-                                <MenuIcon />
-                            </IconButton>
-                            <MyCogsFilters />
-                            <div className="_grow" />
-                            <Typography variant="h6" color="inherit">
-                                Welcome { this.props.userIdentity.username }
-                            </Typography>
-                            <Button variant="contained" color="primary" onClick={this.props.handleAuth}>Log Out</Button>
-
-                        </Toolbar>
-                    </AppBar>
-                </>
-                :
                 <AppBar position="static">
                     <Toolbar variant="dense">
-                        <Button variant="contained" color="primary" onClick={this.props.handleAuth}>Discogs Log In</Button>
+
+                        <MyCogsFilters />
+
+                        <div className="_grow" />
+                        <Typography className={classes.username} variant="h6" color="inherit">
+                            { props.userIdentity.username }
+                        </Typography>
+                        <Button className={classes.button} variant="contained" color="secondary" onClick={props.handleAuth}>Log Out</Button>
+
                     </Toolbar>
                 </AppBar>
-            }
             </>
-        );
-    }
-}
+            :
+            null
+        }
+        </>
+    );
+};
+
+export default MyCogsHeader;

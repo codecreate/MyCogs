@@ -73,7 +73,6 @@ router.get("/collection", function (req, res) {
     let col = new Discogs(app.locals.accessData).user().collection();
     col.getReleases(req.query.username, req.query.folder, {page: req.query.page, per_page: req.query.per_page}, function(err, data){
         if (data){
-            console.log('Collection data ', data);
             res.send(data);
         }else if (err){
             console.log('Collection error ', err);
@@ -85,7 +84,7 @@ router.get("/collection", function (req, res) {
 router.get("/release", function (req, res) {
     console.log('cogsAPI release', req);
     let release = new Discogs(app.locals.accessData).database();
-    release.getRelease(req.release_id, function(err, data){
+    release.getRelease(req.query.release_id, function(err, data){
         if (data){
             console.log('Release data ', data);
             res.send(data);

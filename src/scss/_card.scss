@@ -1,9 +1,22 @@
-.cogs_card{
+.cogs_card {
+  border: 6px outset;
   position: relative;
+
 }
-.cogs_card__details{
+.cogs_card__details__image {
   align-items: center;
   display: flex;
   height: 100%;
   justify-content: center;
+}
+
+.cogs_card__details {
+  background-color: #cccccc;
+  bottom: 0;
+  font-family: "Open Sans Bold", sans-serif;
+  font-weight: 800;
+  font-size: 0.8em;
+  padding: 4px 8px;
+  position: absolute;
+  width: 100%;
 }

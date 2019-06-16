@@ -19,7 +19,7 @@ export default class Auth {
             .catch(err => {
                 console.log("Booo "+err);
         });
-    }
+    };
 
     // parses the result after authentication from URL hash
     handleAuthentication = () => {
@@ -48,7 +48,7 @@ export default class Auth {
             .catch(err => {
                 console.log("Booo "+err);
         });
-    }
+    };
 
     // Sets user details in localStorage
     setSession = (authResult) => {
@@ -60,7 +60,7 @@ export default class Auth {
         // localStorage.setItem('expires_at', expiresAt);
         // navigate to the root route
         history.replace('/');
-    }
+    };
 
     // removes user details from localStorage
     logout = () => {
@@ -68,7 +68,7 @@ export default class Auth {
         localStorage.removeItem('mycogsToken');
         // navigate to the root route
         history.replace('/')
-    }
+    };
 
     // checks if the user is authenticated
     isAuthenticated = () => {

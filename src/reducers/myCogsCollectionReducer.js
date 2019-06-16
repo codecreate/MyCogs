@@ -1,10 +1,11 @@
 
-import {MY_COGS_ADD_COLLECTION, MY_COGS_ADD_LABEL, MY_COGS_FILTER_COLLECTION } from '../actions/actionTypes';
+import {MY_COGS_ADD_COLLECTION, MY_COGS_ADD_LABEL, MY_COGS_FILTER_COLLECTION, MY_COGS_ADD_RELEASE } from '../actions/actionTypes';
 
 const initialState = {
     loadedCollection: [],
     loadedLabels: [],
     filterLabelIDs: [],
+    loadedReleases: []
 };
 
 const myCogsCollectionReducer = (state = initialState, action) => {
@@ -42,6 +43,14 @@ const myCogsCollectionReducer = (state = initialState, action) => {
             return {
                 ...state,
                 filterLabelIDs: state.filterLabelIDs.includes(filterLabelIDs) ? state.filterLabelIDs.filter(item => item != filterLabelIDs )  : [...state.filterLabelIDs, filterLabelIDs]
+            }
+        }
+        case MY_COGS_ADD_RELEASE: {
+            console.log('MY_COGS_ADD_RELEASE',action.payload);
+            const { loadedRelease }  = action.payload;
+            return {
+                ...state,
+                loadedReleases:[...state.loadedReleases, ...loadedRelease]
             }
         }
         default: {

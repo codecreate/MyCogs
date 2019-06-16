@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import history from "./history";
-import {MyCogsHeader} from './containers/MyCogsHeader';
+import MyCogsHeader from './containers/MyCogsHeader';
 import {MyCogsWelcome} from './components/MyCogsWelcome';
 import MyCogsCollection from './containers/MyCogsCollection';
 
@@ -91,7 +91,6 @@ class App extends React.Component<Props, State> {
                 })
                 .then(res => {
                     // add the loaded collection to the redux store with the myCogsAddCollection action
-                    console.log('fetchCollection - myCogsAddCollection', res.releases);
                     this.props.myCogsAddCollection(res.releases);
                     this.props.myCogsAddLabel(res.releases);
                     this.setState({

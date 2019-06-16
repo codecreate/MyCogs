@@ -1,4 +1,4 @@
-import { MY_COGS_ADD_COLLECTION, MY_COGS_ADD_LABEL, MY_COGS_FILTER_COLLECTION } from "./actionTypes";
+import { MY_COGS_ADD_COLLECTION, MY_COGS_ADD_LABEL, MY_COGS_FILTER_COLLECTION, MY_COGS_ADD_RELEASE } from "./actionTypes";
 
 
 export const myCogsAddCollection = loadedCollection => ({
@@ -14,4 +14,9 @@ export const myCogsAddLabel = loadedCollection => ({
 export const myCogsFilterCollection = filterLabelIDs => ({
     type: MY_COGS_FILTER_COLLECTION,
     payload: {filterLabelIDs}
+});
+
+export const myCogsAddRelease = loadedRelease => ({
+    type: MY_COGS_ADD_RELEASE,
+    payload: {loadedRelease}
 });
